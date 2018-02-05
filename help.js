@@ -1,21 +1,34 @@
-
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 
+// oprah character
 var oprah = {
-  x: 250,
-  y: 375,
-  radius: 25,
-  color: '#2e7d32',
-  draw: function() {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
-    ctx.closePath();
-    ctx.fillStyle = this.color;
-    ctx.fill();
+  x: 210,
+  y: 300,
+  moveLeft:  function() { this.x -= 25 },
+  moveRight: function() { this.x += 25 },
+}
+
+function draw(oprah) {
+  var img = new Image();
+  img.onload = function() { 
+     ctx.drawImage(img, oprah.x, oprah.y, 155, 100); 
   }
-};
+  img.src = "./images/Oprah_main_photo.png";
+}
 
-oprah.draw();
+//control oprah
+document.onkeydown = function(e) {
+  switch (e.keyCode) {
+    case 37: oprah.moveLeft();  console.log('left',  oprah); break;
+    case 39: oprah.moveRight(); console.log('right', oprah); break;
+  }
+  updateCanvas();
+}
 
+function updateCanvas() {
+  ctx.clearRect(0,0,1500,1700);
+  draw(oprah)
+}
 
+updateCanvas()

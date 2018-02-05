@@ -91,3 +91,7 @@ h3 {
   padding: 30px 0;
   text-decoration: none;
 }
+
+canvas{
+  background-color: white;
+}
