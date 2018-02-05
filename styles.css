@@ -1,0 +1,93 @@
+* {
+  font-family: Open Sans;
+  background-color: #bec5d1;
+  margin: 0 auto;
+  text-align: center;
+}
+
+canvas {
+  margin: 0px auto;
+  border: 5px solid black;
+
+}
+
+body {
+  background-color: #bec5d1;
+}
+
+.start-page {
+  display: flex;
+  text-align: center;
+  flex-flow: column;
+}
+
+h2 {
+  font-size: 90px;
+  font-weight: 700;
+  padding: 30px 0;
+}
+
+body button {
+  font-size: 25px;
+  background-color: blueviolet;
+  color: #fff;
+  padding: 15px 40px;
+  border: 0;
+  box-shadow: 0;
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+
+.oprah-spinning {
+  width: 45%;
+  padding-bottom: 20px;
+}
+
+.instructions {
+  flex-flow: column;
+  width: 30%;
+  padding: 10px 30px;
+  border-radius: 15px;
+  background-color: #dee5ef;
+  margin-top: 10px;
+}
+
+.instructions p{
+  background-color: #dee5ef;
+  font-size: 10px;
+  margin-top: -20px;
+}
+
+.instructions h3 {
+  font-size: 20px;
+  background-color: #dee5ef;
+  padding-bottom: 30px;
+}
+
+h3 {
+  font-weight: 800;
+}
+
+.bread {
+  width: 15%;
+  background-color: #dee5ef;
+  padding-bottom: 8px;
+}
+
+.money {
+  width: 8%;
+  background-color: #dee5ef;
+}
+
+
+.game-start a{
+  text-decoration: none;
+  color: white;
+}
+
+.oprah-header a{
+  font-size: 90px;
+  font-weight: 700;
+  padding: 30px 0;
+  text-decoration: none;
+}
