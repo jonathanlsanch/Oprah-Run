@@ -1,5 +1,5 @@
 * {
-  font-family: Open Sans;
+  font-family: Helvetica;
   background-color: #bec5d1;
   margin: 0 auto;
   text-align: center;
@@ -7,8 +7,8 @@
 
 canvas {
   margin: 0px auto;
-  border: 5px solid black;
-
+  border-radius: 15px;
+  background-color: #dee5ef;
 }
 
 body {
@@ -25,6 +25,17 @@ h2 {
   font-size: 90px;
   font-weight: 700;
   padding: 30px 0;
+  font-family: Helvetica;
+}
+
+h2 a{
+  text-decoration: none;
+  color: #222529;
+}
+
+h2 a:hover {
+  color: blueviolet;
+  text-decoration: none;
 }
 
 body button {
@@ -37,6 +48,11 @@ body button {
   border-radius: 15px;
   margin-bottom: 20px;
 }
+
+button:hover {
+  background-color: #300c63;
+}
+
 
 .oprah-spinning {
   width: 45%;
@@ -90,8 +106,4 @@ h3 {
   font-weight: 700;
   padding: 30px 0;
   text-decoration: none;
-}
-
-canvas{
-  background-color: white;
 }
