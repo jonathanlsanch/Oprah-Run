@@ -132,6 +132,7 @@ var myBread = [
 function makeBaguette() {
   for (var i=0; i < 1; i++ ) {
   myBread.push(new Bread(getRandom(0, 600), ((Math.random() * canvas.height - 410)), baguette, false, 40, 40));
+  console.log(i)
   }
 }
 
@@ -181,6 +182,8 @@ function makeVanilla() {
   console.log(myVanilla);
   }
 }
+
+
 
 function drawVanilla(){
   myVanilla.forEach(function (oneCone) {
@@ -234,17 +237,28 @@ var counter =function(){
        oprahDraw=false;
     }
 }
+
+// var delay = 3000;
+// setTimeout(function(){
+//   delay = 3000
+// }, 3000)
+
+// setTimeout(function(){
+// makeVanilla
+// }, delay)
+
 // timer interval is every second (1000ms)
 setInterval(counter, 1000);
 // The main game loop
 var main = function () {
   update(0.02); //you can adjust the speed of oprah
   draw();
-  requestAnimationFrame(main);
   drawBaguette();
   drawVanilla();
+  requestAnimationFrame(main);
 };
-
+// makeBaguette();
+//makeVanilla();
 reset();
 main();
 
