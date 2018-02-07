@@ -160,7 +160,7 @@ function Vanilla (x, y, image, isLoaded, width, height) {
 
 Vanilla.prototype.draw = function () {
   ctx.save();
-  ctx.rotate(this.angle += .005);
+  ctx.rotate(this.angle += .006);
   ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
   ctx.restore();
 };
@@ -238,14 +238,19 @@ var counter =function(){
     }
 }
 
-// var delay = 3000;
-// setTimeout(function(){
-//   delay = 3000
-// }, 3000)
+var delay = 2000;
+setTimeout(function () {
+    delay = 2000
+}, 2000);
 
-// setTimeout(function(){
-// makeVanilla
-// }, delay)
+function timeout() {
+    setTimeout(function () {
+        timeout();
+        makeBaguette();
+        makeVanilla();
+    }, delay);
+};
+timeout();
 
 // timer interval is every second (1000ms)
 setInterval(counter, 1000);
@@ -257,7 +262,6 @@ var main = function () {
   drawVanilla();
   requestAnimationFrame(main);
 };
-// makeBaguette();
 //makeVanilla();
 reset();
 main();
