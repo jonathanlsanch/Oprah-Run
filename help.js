@@ -1,55 +1,250 @@
 var canvas = document.getElementById('canvas');
-var ctx = canvas.getContext('2d');
+var ctx = canvas.getContext("2d");
+// Background Image
 
-// oprah character
+var background = false;
+var backgroundImage = new Image();
+backgroundImage.onload = function () {
+  background = true;
+};
+backgroundImage.src = "./images/city.png";
+
+// Oprah
+
+var oprahDraw = false;
+var oprahImage = new Image();
+  oprahImage.onload = function () {
+    oprahDraw = true;
+};
+  oprahImage.src = "./images/718k2y_large.png";
+
+// Coins
+var coinDraw = false;
+var coinImage = new Image();
+coinImage.onload = function () {
+  coinDraw = true;
+};
+
+  coinImage.src = "./images/swag.png";
+  
+
+// Controls and Speed
 var oprah = {
-  x: 210,
-  y: 300
+  speed: 400,
+  x: 240,
+  y: 380
+};
+var vanilla = {};
+var coins = {};
+var coinsCaught = 0;
+// Handle keyboard controls
+var keysDown = {};
+// Check for keys pressed where key represents the keycode captured
+addEventListener("keydown", function (key) {
+  keysDown[key.keyCode] = true;
+}, false);
+addEventListener("keyup", function (key) {
+  delete keysDown[key.keyCode];
+}, false);
+
+// Sets Oprah's location and coins random placement
+var reset = function () {
+  coins.x = 32 + (Math.random() * (canvas.width - 70)); //subtract from canvas height so coins dont leave canvas
+  coins.y = 32 + (Math.random() * (canvas.height - 70));
+  vanilla.x = (Math.random() * (canvas.width - 70));
+  vanilla.y = (Math.random() * (canvas.height - 70));
+};
+
+// Controls
+var update = function (modifier) {
+  if (38 in keysDown) { 
+    oprah.y -= oprah.speed * modifier;
+    if (oprah.y < 0) {
+      oprah.y = 0;
+      }
+  }
+  if (40 in keysDown) { 
+    oprah.y += oprah.speed * modifier;
+    if (oprah.y > 380) {
+      oprah.y = 380;
+      }
+  }
+  if (37 in keysDown) { 
+    oprah.x -= oprah.speed * modifier;
+    if (oprah.x <= 0) {
+      oprah.x = (canvas.width + oprah.x);
+      }
+  }
+  if (39 in keysDown) { 
+    oprah.x += oprah.speed * modifier;
+    if (oprah.x >= canvas.width) {
+      oprah.x = (canvas.width - oprah.x);
+      }
+  }
+
+  // Check if oprah and coins collide
+  if (
+    oprah.x <= (coins.x + 32)
+    && coins.x <= (oprah.x + 50)
+    && oprah.y <= (coins.y + 50)
+    && coins.y <= (oprah.y + 120)
+  ) {
+    ++coinsCaught;
+    reset();
+  }
+
+};
+
+//Make baguettes
+
+var baguette = new Image();
+baguette.src = './images/baguette.png';
+
+function Bread (x, y, image, isLoaded, width, height) {
+  this.x = x
+  this.y = y
+  this.image = image;
+  this.isLoaded = false;
+  this.width = width;
+  this.height = height;
+  this.angle = 0;
+  
 }
 
-function draw(oprah) {
-  var img = new Image();
-  img.onload = function() { 
-     ctx.drawImage(img, oprah.x, oprah.y, 155, 100); 
-  }
-  img.src = "./images/Oprah_main_photo.png";
+Bread.prototype.draw = function () {
+  ctx.save();
+  ctx.rotate(this.angle += .01);
+  ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+  ctx.restore();
+};
 
-  // params for width of canvas
-  if (oprah.x <= 0) {
-    oprah.x = (canvas.width + oprah.x);
-  }
-  if (oprah.x >= canvas.width) {
-    oprah.x = (canvas.width - oprah.x);
+function getRandom(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+var myBread = [
+  new Bread (getRandom(0, 600), ((Math.random() * canvas.height - 410)), baguette, false, 50, 50),
+  new Bread (getRandom(0, 600), ((Math.random() * canvas.height - 410)), baguette, false, 50, 50),
+  new Bread (getRandom(0, 600), ((Math.random() * canvas.height - 410)), baguette, false, 50, 50),
+  new Bread (getRandom(0, 600), ((Math.random() * canvas.height - 410)), baguette, false, 50, 50),
+];
+
+function makeBaguette() {
+  for (var i=0; i < 1; i++ ) {
+  myBread.push(new Bread(getRandom(0, 600), ((Math.random() * canvas.height - 410)), baguette, false, 40, 40));
   }
 }
 
-// money
-
-
-
-//control oprah
-document.onkeydown = function(e) {
-  switch (e.keyCode) {
-    case 37: 
-      // move left  
-      oprah.x -= 25;
-      console.log('left',  oprah); 
-      break;
-    case 39: 
-      // move right 
-      console.log('right', oprah); 
-      oprah.x += 25;
-      break;
+function drawBaguette(){
+  myBread.forEach(function (oneBread) {
+    oneBread.y += 1;
+    oneBread.draw();
   }
-  updateCanvas();
+  )}
+
+//Make ice cream
+
+var iceCream = new Image();
+iceCream.src = './images/Ice-Cream-Free-PNG-Image.png';
+
+function Vanilla (x, y, image, isLoaded, width, height) {
+  this.x = x
+  this.y = y
+  this.image = image;
+  this.isLoaded = false;
+  this.width = width;
+  this.height = height;
+  this.angle = 0;
 }
 
+Vanilla.prototype.draw = function () {
+  ctx.save();
+  ctx.rotate(this.angle += .005);
+  ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+  ctx.restore();
+};
 
-function updateCanvas() {
-  ctx.clearRect(0,0,1500,1700);
-  draw(oprah)
+function getRandom(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-updateCanvas();
+var myVanilla = [
+  new Vanilla (getRandom(0, 800), ((Math.random() * canvas.height - 410)), iceCream, false, 40, 40),
+  new Vanilla (getRandom(0, 800), ((Math.random() * canvas.height - 410)), iceCream, false, 40, 40),
+  new Vanilla (getRandom(0, 800), ((Math.random() * canvas.height - 410)), iceCream, false, 40, 40),
+  new Vanilla (getRandom(0, 800), ((Math.random() * canvas.height - 410)), iceCream, false, 40, 40),
+];
 
-// add falling money
+function makeVanilla() {
+  for (var i=0; i < 1; i++ ) {
+  myVanilla.push(new Vanilla(getRandom(0, 800), ((Math.random() * canvas.height - 410)), iceCream, false, 40, 40));
+  console.log(myVanilla);
+  }
+}
+
+function drawVanilla(){
+  myVanilla.forEach(function (oneCone) {
+    oneCone.y += 1;
+    oneCone.draw();
+  })
+}
+ 
+// DRAW ON THE CANVAS //
+
+var draw = function () {
+  if (background) {
+    ctx.drawImage(backgroundImage, 0, 0);
+  }
+  if (oprahDraw) {
+    ctx.drawImage(oprahImage, oprah.x, oprah.y, 60, 120);
+  }
+  if (coinDraw) {
+    ctx.drawImage(coinImage, coins.x, coins.y, 50, 50);
+  }
+
+  // DISPLAY MONEY BAG AMT AND TIME
+
+  ctx.fillStyle = "black";
+  ctx.font = "20px Helvetica";
+  ctx.textAlign = "left";
+  ctx.textBaseline = "top";
+  ctx.fillText("Money Bags: " + coinsCaught, 440, 5);
+  ctx.fillText("Remaining Time: " + count, 20, 5);
+
+  // Display game over message when timer finished
+  if(finished==true){
+    ctx.fillText("TIME'S UP", 250, 250);
+  }
+  
+};
+var count = 30; // seconds
+var finished = false;
+var counter =function(){
+  count=count-1; // countown by 1 every second
+  // when count reaches 0 clear the timer, hide oprah and
+  // finish the game
+    if (count <= 0)
+    {
+      // stop the timer
+       clearInterval(counter);
+       // set game to finished
+       finished = true;
+       count=0;
+       coinDraw=false;
+       oprahDraw=false;
+    }
+}
+// timer interval is every second (1000ms)
+setInterval(counter, 1000);
+// The main game loop
+var main = function () {
+  update(0.02); //you can adjust the speed of oprah
+  draw();
+  requestAnimationFrame(main);
+  drawBaguette();
+  drawVanilla();
+};
+
+reset();
+main();
+
