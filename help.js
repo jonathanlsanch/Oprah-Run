@@ -36,6 +36,7 @@ var oprah = {
 };
 var vanilla = {};
 var coins = {};
+var oneBread = {};
 var coinsCaught = 0;
 // Handle keyboard controls
 var keysDown = {};
@@ -72,13 +73,13 @@ var update = function (modifier) {
   if (37 in keysDown) { 
     oprah.x -= oprah.speed * modifier;
     if (oprah.x <= 0) {
-      oprah.x = (canvas.width + oprah.x);
+      oprah.x = 0;
       }
   }
   if (39 in keysDown) { 
     oprah.x += oprah.speed * modifier;
-    if (oprah.x >= canvas.width) {
-      oprah.x = (canvas.width - oprah.x);
+    if (oprah.x >= 600) {
+      oprah.x = (canvas.width-oprah.x);
       }
   }
 
@@ -140,8 +141,17 @@ function drawBaguette(){
   myBread.forEach(function (oneBread) {
     oneBread.y += 1;
     oneBread.draw();
-  }
-  )}
+  })
+}
+//   while (oprah.x < oneBread.x + oneBread.width &&
+//     oprah.x + oprah.width > oneBread.x &&
+//     oprah.y < oneBread.y + oneBread.height &&
+//     oprah.height + oprah.y > oneBread.y) {
+//       points += 1;
+//       //removes puppy from canvas without compromising score
+//       oneBread.y += NaN;
+//     }
+
 
 //Make ice cream
 
@@ -204,6 +214,9 @@ var draw = function () {
   if (coinDraw) {
     ctx.drawImage(coinImage, coins.x, coins.y, 50, 50);
   }
+  // if (oneBread) {
+  //   ctx.drawImage(baguette, baguette.x, baguette.y, 10, 10);
+  // }
 
   // DISPLAY MONEY BAG AMT AND TIME
 
@@ -217,6 +230,66 @@ var draw = function () {
   // Display game over message when timer finished
   if(finished==true){
     ctx.fillText("TIME'S UP", 250, 250);
+    // var linkText="http://stackoverflow.com";
+    // var linkX=5;
+    // var linkY=15;
+    // var linkHeight=10;
+    // var linkWidth;
+    // var inLink = false;
+
+    // // draw the balls on the canvas
+    // function draw(){
+    //   canvas = document.getElementById("myCanvas");
+    //   // check if supported
+    //   if(canvas.getContext){
+
+    //     ctx=canvas.getContext("2d");
+
+    //     //clear canvas
+    //     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    //     //draw the link
+    //     ctx.font='10px sans-serif';
+    //     ctx.fillStyle = "#0000ff";
+    //     ctx.fillText(linkText,linkX,linkY);
+    //     linkWidth=ctx.measureText(linkText).width;
+
+    //     //add mouse listeners
+    //     canvas.addEventListener("mousemove", on_mousemove, false);
+    //     canvas.addEventListener("click", on_click, false);
+
+    //   }
+    // }
+
+//check if the mouse is over the link and change cursor style
+function on_mousemove (ev) {
+  var x, y;
+
+  // Get the mouse position relative to the canvas element.
+  if (ev.layerX || ev.layerX == 0) { //for firefox
+    x = ev.layerX;
+    y = ev.layerY;
+  }
+  x-=canvas.offsetLeft;
+  y-=canvas.offsetTop;
+
+  //is the mouse over the link?
+  if(x>=linkX && x <= (linkX + linkWidth) && y<=linkY && y>= (linkY-linkHeight)){
+      document.body.style.cursor = "pointer";
+      inLink=true;
+  }
+  else{
+      document.body.style.cursor = "";
+      inLink=false;
+  }
+}
+
+//if the link has been clicked, go to link
+function on_click(e) {
+  if (inLink)  {
+    window.location = linkText;
+  }
+}
   }
   
 };
