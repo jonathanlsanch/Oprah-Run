@@ -14,10 +14,13 @@ var moneySound = new Audio('./audio/thatsgood.mp3');
 var breadSound = new Audio('./audio/thathitme.mp3');
 var coneSound = new Audio('./audio/icecreamhit.mp3');
 var themeSong = new Audio('./audio/themesongedit.mp3');
+var breadSong = new Audio('./audio/ilovebread.mp3');
 
-themeSong.loop = true;
-themeSong.volume = 0.5;
-themeSong.play();
+themeSong.volume = 0.2
+themeSong.loop = true
+themeSong.play()
+
+breadSong.play();
 
 //Background
 var background = false;
@@ -257,12 +260,12 @@ var draw = function () {
     ctx.fillText("TIME'S UP", 250, 250);
   }
   if(lose == true){
-    ctx.fillText("TOO MANY WEIGHT WATCHERS POINTS", 250, 250);
+    ctx.fillText("YOU BROKE YOUR DIET", 180, 150);
   }
   
 };
 
-var weightWatchers = 10;
+var weightWatchers = 5;
 var lose = false; 
 function checkWeight(){
     if (weightWatchers <= 0)
@@ -272,7 +275,7 @@ function checkWeight(){
        lose = true;
        coinDraw=false;
        oprahDraw=false;
-      //  stopDraw();
+       stopDraw();
 
     }
   // if(lose==true){
@@ -281,9 +284,9 @@ function checkWeight(){
   // }
 }
 
-// function stopDraw(){
-//   setTimeout(main, 10000)
-// }
+function stopDraw(){
+  setTimeout(main, 20000)
+}
 
 var count = 30; // seconds
 var finished = false;
