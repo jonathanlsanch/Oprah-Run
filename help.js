@@ -1,19 +1,22 @@
 // Play music on start page
 
 var canvas = document.getElementById('canvasmain');
-var gameSFX = new Audio('./audio/themesongedit.mp3');
+var mainSong = new Audio('./audio/themesongedit.mp3');
 
-gameSFX.loop = true;
-gameSFX.play();
+mainSong.loop = true;
+mainSong.volume = 0.3;
+mainSong.play();
 
 //Game Page Canvas
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext("2d");
-var moneySFX = new Audio('./audio/thatsgood.mp3');
-var gameSFX = new Audio('./audio/themesongedit.mp3');
+var moneySound = new Audio('./audio/thatsgood.mp3');
+var breadSFX = new Audio('./audio/thathitme.mp3');
+var themeSong = new Audio('./audio/themesongedit.mp3');
 
-gameSFX.loop = true;
-gameSFX.play();
+themeSong.loop = true;
+themeSong.volume = 0.5;
+themeSong.play();
 
 //Background
 var background = false;
@@ -100,7 +103,7 @@ var update = function (modifier) {
     && oprah.y <= (coins.y + 50)
     && coins.y <= (oprah.y + 120)
   ) {
-    moneySFX.play();
+    moneySound.play();
     ++coinsCaught;
     reset();
   }
@@ -150,55 +153,19 @@ function makeBaguette() {
   }
 
 function drawBaguette(){
-  myBread.forEach(function (onePuppy) {
-    onePuppy.y += 1;
-    onePuppy.draw();
-  
+  myBread.forEach(function (oneBread) {
+    oneBread.y += 1;
+    oneBread.draw();
+
     if (
-      oprah.x <= (onePuppy.x + 32)
-      && onePuppy.x <= (oprah.x + 50)
-      && oprah.y+60<= (onePuppy.y + 50)
-      && onePuppy.y <= (oprah.y + 120)
+      oprah.x <= (oneBread.x + 32)
+      && oneBread.x <= (oprah.x + 50)
+      && oprah.y+60<= (oneBread.y + 50)
+      && oneBread.y <= (oprah.y + 120)
     ) {
-      console.log("COLLISION");
-    }
-      // collision detection for catching box
-      // if (oprah.x < onePuppy.x + onePuppy.width 
-      //   &&
-      //   oprah.x + oprah.width > onePuppy.x 
-      //   // &&
-      //   // oprah.y < onePuppy.y + onePuppy.height &&
-      //   // oprah.height + oprah.y > onePuppy.y
-      // ) {
-      //   console.log("=========================")
-      //     // points += 1;
-      //     console.log("oprah.x: ", oprah.x);
-      //     // console.log("oprah.y", oprah.y)
-      //     console.log("onePuppy.x: ", onePuppy.x);
-      //     console.log("onePuppy.width",onePuppy.width);
-      //     // console.log("onePuppy.y: ", onePuppy.y);
-      //     // console.log("onePuppy.height", onePuppy.height)
-      //     //removes puppy from canvas without compromising score
-      //     console.log("COLLISION")
-      //     console.log("=========================")
-
-      //     // onePuppy.y += NaN;
-
-      //     // puppiesSaved.empty();
-      //     // puppiesSaved.append(points);
-      //     // caughtSFX.play();
-      //   }
-  })
-}
-  // while (oprah.x < oneBread.x + oneBread.width &&
-  //   oprah.x + oprah.width > oneBread.x &&
-  //   oprah.y < oneBread.y + oneBread.height &&
-  //   oprah.height + oprah.y > oneBread.y) {
-  //     points += 1;
-  //     //removes puppy from canvas without compromising score
-  //     oneBread.y += NaN;
-  //   }
-  
+      breadSFX.play();
+    }})
+};
 
 //Make ice cream
 
@@ -217,7 +184,6 @@ function Vanilla (x, y, image, isLoaded, width, height) {
 
 Vanilla.prototype.draw = function () {
   ctx.save();
-  ctx.rotate(this.angle += .006);
   ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
   ctx.restore();
 };
@@ -244,8 +210,17 @@ function drawVanilla(){
   myVanilla.forEach(function (oneCone) {
     oneCone.y += 1;
     oneCone.draw();
-  })
-}
+
+    if (
+      oprah.x <= (oneCone.x + 32)
+      && oneCone.x <= (oprah.x + 50)
+      && oprah.y+60<= (oneCone.y + 50)
+      && oneCone.y <= (oprah.y + 120)
+    ) {
+      breadSFX.play();
+    }})
+};
+
  
 // DRAW ON THE CANVAS //
 
@@ -259,9 +234,6 @@ var draw = function () {
   if (coinDraw) {
     ctx.drawImage(coinImage, coins.x, coins.y, 50, 50);
   }
-  // if (oneBread) {
-  //   ctx.drawImage(baguette, baguette.x, baguette.y, 10, 10);
-  // }
 
   // DISPLAY MONEY BAG AMT AND TIME
 
