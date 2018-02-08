@@ -52,7 +52,6 @@ var oprah = {
 var vanilla = {};
 var coins = {};
 var coinsCaught = 0;
-var weightWatchers = 5;
 // Handle keyboard controls
 var keysDown = {};
 // Check for keys pressed where key represents the keycode captured
@@ -67,8 +66,8 @@ addEventListener("keyup", function (key) {
 var reset = function () {
   coins.x = 32 + (Math.random() * (canvas.width - 70)); //subtract from canvas height so coins dont leave canvas
   coins.y = 32 + (Math.random() * (canvas.height - 70));
-  vanilla.x = (Math.random() * (canvas.width - 70));
-  vanilla.y = (Math.random() * (canvas.height - 70));
+  // vanilla.x = (Math.random() * (canvas.width - 70));
+  // vanilla.y = (Math.random() * (canvas.height - 70));
 };
 
 // Controls
@@ -165,8 +164,10 @@ function drawBaguette(){
       && oprah.y+60<= (oneBread.y + 50)
       && oneBread.y <= (oprah.y + 120)
     ) {
+      oneBread.y += NaN;
       breadSound.play();
       --weightWatchers;
+      checkWeight();
     }})
 };
 
@@ -220,8 +221,10 @@ function drawVanilla(){
       && oprah.y+60<= (oneCone.y + 50)
       && oneCone.y <= (oprah.y + 120)
     ) {
+      oneCone.y += NaN;
       coneSound.play();
       --weightWatchers;
+      checkWeight();
     }})
 };
 
@@ -252,69 +255,36 @@ var draw = function () {
   // Display game over message when timer finished
   if(finished==true){
     ctx.fillText("TIME'S UP", 250, 250);
-    // var linkText="http://stackoverflow.com";
-    // var linkX=5;
-    // var linkY=15;
-    // var linkHeight=10;
-    // var linkWidth;
-    // var inLink = false;
-
-    // // draw the balls on the canvas
-    // function draw(){
-    //   canvas = document.getElementById("myCanvas");
-    //   // check if supported
-    //   if(canvas.getContext){
-
-    //     ctx=canvas.getContext("2d");
-
-    //     //clear canvas
-    //     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    //     //draw the link
-    //     ctx.font='10px sans-serif';
-    //     ctx.fillStyle = "#0000ff";
-    //     ctx.fillText(linkText,linkX,linkY);
-    //     linkWidth=ctx.measureText(linkText).width;
-
-    //     //add mouse listeners
-    //     canvas.addEventListener("mousemove", on_mousemove, false);
-    //     canvas.addEventListener("click", on_click, false);
-
-    //   }
-    // }
-
-//check if the mouse is over the link and change cursor style
-function on_mousemove (ev) {
-  var x, y;
-
-  // Get the mouse position relative to the canvas element.
-  if (ev.layerX || ev.layerX == 0) { //for firefox
-    x = ev.layerX;
-    y = ev.layerY;
   }
-  x-=canvas.offsetLeft;
-  y-=canvas.offsetTop;
-
-  //is the mouse over the link?
-  if(x>=linkX && x <= (linkX + linkWidth) && y<=linkY && y>= (linkY-linkHeight)){
-      document.body.style.cursor = "pointer";
-      inLink=true;
-  }
-  else{
-      document.body.style.cursor = "";
-      inLink=false;
-  }
-}
-
-//if the link has been clicked, go to link
-function on_click(e) {
-  if (inLink)  {
-    window.location = linkText;
-  }
-}
+  if(lose == true){
+    ctx.fillText("TOO MANY WEIGHT WATCHERS POINTS", 250, 250);
   }
   
 };
+
+var weightWatchers = 10;
+var lose = false; 
+function checkWeight(){
+    if (weightWatchers <= 0)
+    {
+       clearInterval(counter);
+       // set game to finished
+       lose = true;
+       coinDraw=false;
+       oprahDraw=false;
+      //  stopDraw();
+
+    }
+  // if(lose==true){
+    // ctx.fillText("TOO MANY WEIGHT WATCHERS POINTS", 250, 250);
+
+  // }
+}
+
+// function stopDraw(){
+//   setTimeout(main, 10000)
+// }
+
 var count = 30; // seconds
 var finished = false;
 var counter =function(){

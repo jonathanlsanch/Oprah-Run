@@ -1,22 +1,21 @@
 * {
   font-family: Helvetica;
-  background-color: #bec5d1;
   margin: 0 auto;
   text-align: center;
 }
+
 
 canvas {
   margin: 0px auto;
   border-radius: 15px;
   background-color: #dee5ef;
-}
-
-.canvasone {
-  background-color: blue;
+  margin-top: 30px;
 }
 
 body {
   background-color: #bec5d1;
+  background-image: url(./images/mainbackground.png);
+  background-repeat: no-repeat;
 }
 
 .start-page {
@@ -26,20 +25,21 @@ body {
 }
 
 h2 {
-  font-size: 90px;
+  font-size: 80px;
   font-weight: 700;
-  padding: 30px 0;
   font-family: Helvetica;
-  color: #2B125F;
+  color: white;
+  margin-bottom: -15px;
+  text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
 }
 
 h2 a{
   text-decoration: none;
-  color: #2B125F;
+  color: white;
 }
 
 h2 a:hover {
-  color: blueviolet;
+  color: #A4A6B8;
   text-decoration: none;
 }
 
@@ -49,11 +49,11 @@ body button {
   background-size: 350px;
   background-position: center;
   color: #fff;
-  padding: 15px 40px;
+  padding: 13px 45px;
   border: 0;
   box-shadow: 0;
   border-radius: 15px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   -webkit-filter: grayscale(100%);
 }
 
@@ -67,7 +67,7 @@ button:hover {
 
 
 .oprah-spinning {
-  width: 45%;
+  width: 40%;
   padding-bottom: 20px;
 }
 
@@ -78,6 +78,7 @@ button:hover {
   border-radius: 15px;
   background-color: #dee5ef;
   margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .instructions p{
@@ -89,8 +90,35 @@ button:hover {
 .instructions h3 {
   font-size: 20px;
   background-color: #dee5ef;
-  padding-bottom: 30px;
+  padding-bottom: 15px;
   color: #2B125F;
+}
+
+.objective {
+  flex-flow: column;
+  width: 30%;
+  padding: 10px 30px;
+  border-radius: 15px;
+  background-color: #dee5ef;
+  margin-bottom: 10px;
+}
+
+.objective p{
+  background-color: #dee5ef;
+  font-size: 10px;
+  margin-top: -20px;
+}
+
+.objective h3 {
+  font-size: 20px;
+  background-color: #dee5ef;
+  padding-bottom: 15px;
+  color: #2B125F;
+}
+.objective h4 {
+  font-size: 15px;
+  background-color: #dee5ef;
+  color: black;
 }
 
 
@@ -103,6 +131,19 @@ h3 {
   background-color: #dee5ef;
   padding-bottom: 8px;
 }
+.vanilla {
+  width: 10%;
+  background-color: #dee5ef;
+  padding-bottom: 8px;
+}
+
+.arrows {
+  width: 20%;
+  background-color: #dee5ef;
+  padding-bottom: 20px;
+}
+
+
 
 .money {
   width: 8%;
