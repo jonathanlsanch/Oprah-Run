@@ -1,22 +1,35 @@
+// Play music on start page
+
+var canvas = document.getElementById('canvasmain');
+var gameSFX = new Audio('./audio/themesongedit.mp3');
+
+gameSFX.loop = true;
+gameSFX.play();
+
+//Game Page Canvas
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext("2d");
-// Background Image
+var moneySFX = new Audio('./audio/thatsgood.mp3')
+var gameSFX = new Audio('./audio/themesongedit.mp3');
 
+gameSFX.loop = true;
+gameSFX.play();
+
+//Background
 var background = false;
 var backgroundImage = new Image();
 backgroundImage.onload = function () {
   background = true;
 };
-backgroundImage.src = "./images/city.png";
+backgroundImage.src = "./images/background.png";
 
 // Oprah
-
 var oprahDraw = false;
 var oprahImage = new Image();
   oprahImage.onload = function () {
     oprahDraw = true;
 };
-  oprahImage.src = "./images/718k2y_large.png";
+  oprahImage.src = "./images/oprahplayer.png";
 
 // Coins
 var coinDraw = false;
@@ -24,10 +37,8 @@ var coinImage = new Image();
 coinImage.onload = function () {
   coinDraw = true;
 };
-
   coinImage.src = "./images/swag.png";
   
-
 // Controls and Speed
 var oprah = {
   speed: 400,
@@ -36,7 +47,6 @@ var oprah = {
 };
 var vanilla = {};
 var coins = {};
-var oneBread = {};
 var coinsCaught = 0;
 // Handle keyboard controls
 var keysDown = {};
@@ -90,6 +100,7 @@ var update = function (modifier) {
     && oprah.y <= (coins.y + 50)
     && coins.y <= (oprah.y + 120)
   ) {
+    moneySFX.play();
     ++coinsCaught;
     reset();
   }
@@ -97,7 +108,6 @@ var update = function (modifier) {
 };
 
 //Make baguettes
-
 var baguette = new Image();
 baguette.src = './images/baguette.png';
 
@@ -135,14 +145,38 @@ function makeBaguette() {
   myBread.push(new Bread(getRandom(0, 600), ((Math.random() * canvas.height - 410)), baguette, false, 40, 40));
   console.log(i)
   }
-}
 
-function drawBaguette(){
-  myBread.forEach(function (oneBread) {
-    oneBread.y += 1;
-    oneBread.draw();
-  })
-}
+  }
+
+  function drawBaguette(){
+    myBread.forEach(function (oneBread) {
+      oneBread.y += 1;
+      oneBread.draw();
+    })
+  }
+
+
+
+  // function drawBaguette(){
+  //   myPuppies.forEach(function (onePuppy) {
+  //     onePuppy.y += 1;
+  //     onePuppy.draw();
+    
+  
+  //     // collision detection for catching box
+  //     while (oprah.x < onePuppy.x + onePuppy.width &&
+  //       oprah.x + oprah.width > onePuppy.x &&
+  //       oprah.y < onePuppy.y + onePuppy.height &&
+  //       oprah.height + oprah.y > onePuppy.y) {
+  //         points += 1;
+  //         //removes puppy from canvas without compromising score
+  //         onePuppy.y += NaN;
+  //         // puppiesSaved.empty();
+  //         // puppiesSaved.append(points);
+  //         // caughtSFX.play();
+  //       }
+  // })
+
 //   while (oprah.x < oneBread.x + oneBread.width &&
 //     oprah.x + oprah.width > oneBread.x &&
 //     oprah.y < oneBread.y + oneBread.height &&
@@ -156,7 +190,7 @@ function drawBaguette(){
 //Make ice cream
 
 var iceCream = new Image();
-iceCream.src = './images/Ice-Cream-Free-PNG-Image.png';
+iceCream.src = './images/vanilla.png';
 
 function Vanilla (x, y, image, isLoaded, width, height) {
   this.x = x
@@ -192,8 +226,6 @@ function makeVanilla() {
   console.log(myVanilla);
   }
 }
-
-
 
 function drawVanilla(){
   myVanilla.forEach(function (oneCone) {
@@ -335,7 +367,6 @@ var main = function () {
   drawVanilla();
   requestAnimationFrame(main);
 };
-//makeVanilla();
+
 reset();
 main();
-
