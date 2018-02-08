@@ -9,7 +9,7 @@ gameSFX.play();
 //Game Page Canvas
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext("2d");
-var moneySFX = new Audio('./audio/thatsgood.mp3')
+var moneySFX = new Audio('./audio/thatsgood.mp3');
 var gameSFX = new Audio('./audio/themesongedit.mp3');
 
 gameSFX.loop = true;
@@ -120,11 +120,12 @@ function Bread (x, y, image, isLoaded, width, height) {
   this.height = height;
   this.angle = 0;
   
+  
 }
 
 Bread.prototype.draw = function () {
   ctx.save();
-  ctx.rotate(this.angle += .01);
+  // ctx.rotate(this.angle += .01);
   ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
   ctx.restore();
 };
@@ -143,49 +144,61 @@ var myBread = [
 function makeBaguette() {
   for (var i=0; i < 1; i++ ) {
   myBread.push(new Bread(getRandom(0, 600), ((Math.random() * canvas.height - 410)), baguette, false, 40, 40));
-  console.log(i)
+  // console.log(i)
   }
 
   }
 
-  function drawBaguette(){
-    myBread.forEach(function (oneBread) {
-      oneBread.y += 1;
-      oneBread.draw();
-    })
-  }
-
-
-
-  // function drawBaguette(){
-  //   myPuppies.forEach(function (onePuppy) {
-  //     onePuppy.y += 1;
-  //     onePuppy.draw();
-    
+function drawBaguette(){
+  myBread.forEach(function (onePuppy) {
+    onePuppy.y += 1;
+    onePuppy.draw();
   
-  //     // collision detection for catching box
-  //     while (oprah.x < onePuppy.x + onePuppy.width &&
-  //       oprah.x + oprah.width > onePuppy.x &&
-  //       oprah.y < onePuppy.y + onePuppy.height &&
-  //       oprah.height + oprah.y > onePuppy.y) {
-  //         points += 1;
-  //         //removes puppy from canvas without compromising score
-  //         onePuppy.y += NaN;
-  //         // puppiesSaved.empty();
-  //         // puppiesSaved.append(points);
-  //         // caughtSFX.play();
-  //       }
-  // })
+    if (
+      oprah.x <= (onePuppy.x + 32)
+      && onePuppy.x <= (oprah.x + 50)
+      && oprah.y+60<= (onePuppy.y + 50)
+      && onePuppy.y <= (oprah.y + 120)
+    ) {
+      console.log("COLLISION");
+    }
+      // collision detection for catching box
+      // if (oprah.x < onePuppy.x + onePuppy.width 
+      //   &&
+      //   oprah.x + oprah.width > onePuppy.x 
+      //   // &&
+      //   // oprah.y < onePuppy.y + onePuppy.height &&
+      //   // oprah.height + oprah.y > onePuppy.y
+      // ) {
+      //   console.log("=========================")
+      //     // points += 1;
+      //     console.log("oprah.x: ", oprah.x);
+      //     // console.log("oprah.y", oprah.y)
+      //     console.log("onePuppy.x: ", onePuppy.x);
+      //     console.log("onePuppy.width",onePuppy.width);
+      //     // console.log("onePuppy.y: ", onePuppy.y);
+      //     // console.log("onePuppy.height", onePuppy.height)
+      //     //removes puppy from canvas without compromising score
+      //     console.log("COLLISION")
+      //     console.log("=========================")
 
-//   while (oprah.x < oneBread.x + oneBread.width &&
-//     oprah.x + oprah.width > oneBread.x &&
-//     oprah.y < oneBread.y + oneBread.height &&
-//     oprah.height + oprah.y > oneBread.y) {
-//       points += 1;
-//       //removes puppy from canvas without compromising score
-//       oneBread.y += NaN;
-//     }
+      //     // onePuppy.y += NaN;
 
+      //     // puppiesSaved.empty();
+      //     // puppiesSaved.append(points);
+      //     // caughtSFX.play();
+      //   }
+  })
+}
+  // while (oprah.x < oneBread.x + oneBread.width &&
+  //   oprah.x + oprah.width > oneBread.x &&
+  //   oprah.y < oneBread.y + oneBread.height &&
+  //   oprah.height + oprah.y > oneBread.y) {
+  //     points += 1;
+  //     //removes puppy from canvas without compromising score
+  //     oneBread.y += NaN;
+  //   }
+  
 
 //Make ice cream
 
@@ -223,7 +236,7 @@ var myVanilla = [
 function makeVanilla() {
   for (var i=0; i < 1; i++ ) {
   myVanilla.push(new Vanilla(getRandom(0, 800), ((Math.random() * canvas.height - 410)), iceCream, false, 40, 40));
-  console.log(myVanilla);
+  // console.log(myVanilla);
   }
 }
 
