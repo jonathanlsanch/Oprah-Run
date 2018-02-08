@@ -11,7 +11,8 @@ mainSong.play();
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext("2d");
 var moneySound = new Audio('./audio/thatsgood.mp3');
-var breadSFX = new Audio('./audio/thathitme.mp3');
+var breadSound = new Audio('./audio/thathitme.mp3');
+var coneSound = new Audio('./audio/icecreamhit.mp3');
 var themeSong = new Audio('./audio/themesongedit.mp3');
 
 themeSong.loop = true;
@@ -51,6 +52,7 @@ var oprah = {
 var vanilla = {};
 var coins = {};
 var coinsCaught = 0;
+var weightWatchers = 5;
 // Handle keyboard controls
 var keysDown = {};
 // Check for keys pressed where key represents the keycode captured
@@ -163,7 +165,8 @@ function drawBaguette(){
       && oprah.y+60<= (oneBread.y + 50)
       && oneBread.y <= (oprah.y + 120)
     ) {
-      breadSFX.play();
+      breadSound.play();
+      --weightWatchers;
     }})
 };
 
@@ -217,7 +220,8 @@ function drawVanilla(){
       && oprah.y+60<= (oneCone.y + 50)
       && oneCone.y <= (oprah.y + 120)
     ) {
-      breadSFX.play();
+      coneSound.play();
+      --weightWatchers;
     }})
 };
 
@@ -243,6 +247,7 @@ var draw = function () {
   ctx.textBaseline = "top";
   ctx.fillText("Money Bags: " + coinsCaught, 440, 5);
   ctx.fillText("Remaining Time: " + count, 20, 5);
+  ctx.fillText("Weight Watcher Points: " + weightWatchers, 348, 30);
 
   // Display game over message when timer finished
   if(finished==true){
