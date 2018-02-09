@@ -14,13 +14,11 @@ var moneySound = new Audio('./audio/thatsgood.mp3');
 var breadSound = new Audio('./audio/thathitme.mp3');
 var coneSound = new Audio('./audio/icecreamhit.mp3');
 var themeSong = new Audio('./audio/themesongedit.mp3');
-var breadSong = new Audio('./audio/ilovebread.mp3');
 
 themeSong.volume = 0.2
 themeSong.loop = true
 themeSong.play()
 
-breadSong.play();
 
 //Background
 var background = false;
@@ -69,9 +67,7 @@ addEventListener("keyup", function (key) {
 var reset = function () {
   coins.x = 32 + (Math.random() * (canvas.width - 70)); //subtract from canvas height so coins dont leave canvas
   coins.y = 32 + (Math.random() * (canvas.height - 70));
-  // vanilla.x = (Math.random() * (canvas.width - 70));
-  // vanilla.y = (Math.random() * (canvas.height - 70));
-};
+}
 
 // Controls
 var update = function (modifier) {
@@ -100,7 +96,7 @@ var update = function (modifier) {
       }
   }
 
-  // Check if oprah and coins collide
+  // Oprah and coins collision
   if (
     oprah.x <= (coins.x + 32)
     && coins.x <= (oprah.x + 50)
@@ -151,16 +147,17 @@ var myBread = [
 function makeBaguette() {
   for (var i=0; i < 1; i++ ) {
   myBread.push(new Bread(getRandom(0, 600), ((Math.random() * canvas.height - 410)), baguette, false, 40, 40));
-  // console.log(i)
-  }
 
   }
 
+}
+
+//Baguette constantly falling
 function drawBaguette(){
   myBread.forEach(function (oneBread) {
     oneBread.y += 1;
     oneBread.draw();
-
+//Oprah and baguette collision
     if (
       oprah.x <= (oneBread.x + 32)
       && oneBread.x <= (oprah.x + 50)
@@ -209,15 +206,15 @@ var myVanilla = [
 function makeVanilla() {
   for (var i=0; i < 1; i++ ) {
   myVanilla.push(new Vanilla(getRandom(0, 800), ((Math.random() * canvas.height - 410)), iceCream, false, 40, 40));
-  // console.log(myVanilla);
+
   }
 }
-
+//Ice cream constantly falling
 function drawVanilla(){
   myVanilla.forEach(function (oneCone) {
     oneCone.y += 1;
     oneCone.draw();
-
+//Oprah and Ice cream collision
     if (
       oprah.x <= (oneCone.x + 32)
       && oneCone.x <= (oprah.x + 50)
@@ -258,6 +255,7 @@ var draw = function () {
   // Display game over message when timer finished
   if(finished==true){
     ctx.fillText("TIME'S UP", 250, 250);
+    ctx.fillText("CLICK THE TITLE TO PLAY AGAIN", 150, 200);
   }
   if(lose == true){
     ctx.fillText("YOU BROKE YOUR DIET", 180, 150);
@@ -277,12 +275,7 @@ function checkWeight(){
        oprahDraw=false;
        stopDraw();
 
-    }
-  // if(lose==true){
-    // ctx.fillText("TOO MANY WEIGHT WATCHERS POINTS", 250, 250);
-
-  // }
-}
+  }}
 
 function stopDraw(){
   setTimeout(main, 20000)
