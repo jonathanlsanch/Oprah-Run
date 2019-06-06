@@ -1,4 +1,6 @@
 # Oprah Run
+DESKTOP ONLY!
+Play game here: https://jonathanlsanch.github.io/Oprah-Run/
 
 ## Instructions
 
@@ -8,7 +10,3 @@ If you collide with 5 or more falling obstacles within the 30 seconds the game w
 
 
 Here is the live link: https://jonathanlsanch.github.io/Oprah-Run/
-
-### Special Thanks
-
-Jessica Alin's - Puppy Run for inspiration: https://github.com/jessicaalin/puppy-rescue/
